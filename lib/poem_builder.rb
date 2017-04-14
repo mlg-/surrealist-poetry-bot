@@ -17,7 +17,7 @@ class PoemBuilder
 
     finished_work = "#{user} #{first_line} / #{second_line} / #{final_line}"
 
-    finished_work.size > 140 ? trimmed_work(finished_work) : finished_work
+    finished_work.size > 135 ? trimmed_work(finished_work) : finished_work
   end
 
   private
@@ -42,7 +42,7 @@ class PoemBuilder
   def trimmed_work(finished_work)
     array_ified_poem = finished_work.split(" ")
 
-    until finished_work.size < 140
+    until finished_work.size < 135
       remove = rand(array_ified_poem.size - 1)
       array_ified_poem.delete_at(remove) unless delimiter_or_usn?(array_ified_poem[remove])
       finished_work = array_ified_poem.join(" ")
