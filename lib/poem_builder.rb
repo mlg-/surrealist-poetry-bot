@@ -2,7 +2,9 @@ require "marky_markov"
 require "pry"
 
 class PoemBuilder
-  def initialize(user:)
+  def initialize(user:, raptor_mode: false, brony_mode: false)
+    @raptor_mode = raptor_mode
+    @brony_mode = brony_mode
     @user = user
     @dictionary = MarkyMarkov::Dictionary.new("surrealism")
     @words = assemble_words
@@ -22,7 +24,13 @@ class PoemBuilder
   attr_accessor :words, :dictionary, :user
 
   def fill_dictionary
-    dictionary.parse_file "source-texts/curated.txt"
+    if @brony_mode
+      dictionary.parse_file "source-texts/mlp.txt"
+    elsif @raptor_mode
+      dictionary.parse_file "source-texts/dino-mode.txt"
+    else
+      dictionary.parse_file "source-texts/curated.txt"
+    end
   end
 
   def assemble_words

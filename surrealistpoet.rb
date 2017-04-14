@@ -18,7 +18,15 @@ require 'pry'
   use_streaming
 
 replies do |tweet|
-  txt = PoemBuilder.new(user: "#USER#").poof
+  txt = PoemBuilder.new(user: "#USER#", raptor_mode: raptor_mode?(tweet), brony_mode: brony_mode?(tweet)).poof
 
-  reply txt,tweet
+  reply txt, tweet
+end
+
+def raptor_mode?(tweet)
+  tweet.text.include?("raptor")
+end
+
+def brony_mode?(tweet)
+  tweet.text.include?("pony")
 end
